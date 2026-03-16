@@ -166,17 +166,17 @@
 
     /* ── Photography grid ── */
     .photo-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
+      position: relative;
     }
 
-    .photo-grid img {
+    .photo-item {
+      display: block;
+    }
+
+    .photo-item img {
       display: block;
       width: 100%;
       height: auto;
-      aspect-ratio: 3 / 2;
-      object-fit: cover;
       border-radius: 4px;
       border: 1px solid rgba(26, 24, 20, 0.18);
       box-shadow: 0 2px 10px rgba(26, 24, 20, 0.07);
@@ -188,10 +188,6 @@
         --content-padding: 22px;
       }
 
-      .photo-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
-      }
 
       .project-images img {
         max-width: 100%;
@@ -207,12 +203,6 @@
       }
     }
 
-    @media (max-width: 420px) {
-      .photo-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 8px;
-      }
-    }
   </style>
 </head>
 <body>
@@ -265,39 +255,40 @@
     </div>
 
     <div class="photo-grid">
-      <img src="images/photographyPortfolio/photo1.jpg"  alt="Photography 1"  loading="lazy" />
-      <img src="images/photographyPortfolio/photo2.jpg"  alt="Photography 2"  loading="lazy" />
-      <img src="images/photographyPortfolio/photo3.jpg"  alt="Photography 3"  loading="lazy" />
-      <img src="images/photographyPortfolio/photo4.jpg"  alt="Photography 4"  loading="lazy" />
-      <img src="images/photographyPortfolio/photo5.jpg"  alt="Photography 5"  loading="lazy" />
-      <img src="images/photographyPortfolio/photo6.jpg"  alt="Photography 6"  loading="lazy" />
-      <img src="images/photographyPortfolio/photo7.jpg"  alt="Photography 7"  loading="lazy" />
-      <img src="images/photographyPortfolio/photo8.jpg"  alt="Photography 8"  loading="lazy" />
-      <img src="images/photographyPortfolio/photo9.jpg"  alt="Photography 9"  loading="lazy" />
-      <img src="images/photographyPortfolio/photo10.jpg" alt="Photography 10" loading="lazy" />
-      <img src="images/photographyPortfolio/photo11.jpg" alt="Photography 11" loading="lazy" />
-      <img src="images/photographyPortfolio/photo12.jpg" alt="Photography 12" loading="lazy" />
-      <img src="images/photographyPortfolio/photo13.jpg" alt="Photography 13" loading="lazy" />
-      <img src="images/photographyPortfolio/photo14.jpg" alt="Photography 14" loading="lazy" />
-      <img src="images/photographyPortfolio/photo15.jpg" alt="Photography 15" loading="lazy" />
-      <img src="images/photographyPortfolio/photo16.jpg" alt="Photography 16" loading="lazy" />
-      <img src="images/photographyPortfolio/photo17.jpg" alt="Photography 17" loading="lazy" />
-      <img src="images/photographyPortfolio/photo18.jpg" alt="Photography 18" loading="lazy" />
-      <img src="images/photographyPortfolio/photo19.jpg" alt="Photography 19" loading="lazy" />
-      <img src="images/photographyPortfolio/photo20.jpg" alt="Photography 20" loading="lazy" />
-      <img src="images/photographyPortfolio/photo21.jpg" alt="Photography 21" loading="lazy" />
-      <img src="images/photographyPortfolio/photo22.jpg" alt="Photography 22" loading="lazy" />
-      <img src="images/photographyPortfolio/photo23.jpg" alt="Photography 23" loading="lazy" />
-      <img src="images/photographyPortfolio/photo24.jpg" alt="Photography 24" loading="lazy" />
-      <img src="images/photographyPortfolio/photo25.jpg" alt="Photography 25" loading="lazy" />
-      <img src="images/photographyPortfolio/photo26.jpg" alt="Photography 26" loading="lazy" />
-      <img src="images/photographyPortfolio/photo27.jpg" alt="Photography 27" loading="lazy" />
-      <img src="images/photographyPortfolio/photo28.jpg" alt="Photography 28" loading="lazy" />
-      <img src="images/photographyPortfolio/photo29.jpg" alt="Photography 29" loading="lazy" />
-      <img src="images/photographyPortfolio/photo30.jpg" alt="Photography 30" loading="lazy" />
-      <img src="images/photographyPortfolio/photo31.jpg" alt="Photography 31" loading="lazy" />
+      <div class="photo-item"><img src="images/photographyPortfolio/photo1.jpg"  alt="Photography 1"  loading="lazy" /></div>
+      <div class="photo-item"><img src="images/photographyPortfolio/photo2.jpg"  alt="Photography 2"  loading="lazy" /></div>
+      <div class="photo-item"><img src="images/photographyPortfolio/photo3.jpg"  alt="Photography 3"  loading="lazy" /></div>
+      <div class="photo-item"><img src="images/photographyPortfolio/photo4.jpg"  alt="Photography 4"  loading="lazy" /></div>
+      <div class="photo-item"><img src="images/photographyPortfolio/photo5.jpg"  alt="Photography 5"  loading="lazy" /></div>
+      <div class="photo-item"><img src="images/photographyPortfolio/photo6.jpg"  alt="Photography 6"  loading="lazy" /></div>
+      <div class="photo-item"><img src="images/photographyPortfolio/photo7.jpg"  alt="Photography 7"  loading="lazy" /></div>
+      <div class="photo-item"><img src="images/photographyPortfolio/photo8.jpg"  alt="Photography 8"  loading="lazy" /></div>
+      <div class="photo-item"><img src="images/photographyPortfolio/photo9.jpg"  alt="Photography 9"  loading="lazy" /></div>
+      <div class="photo-item"><img src="images/photographyPortfolio/photo10.jpg" alt="Photography 10" loading="lazy" /></div>
+      <div class="photo-item"><img src="images/photographyPortfolio/photo11.jpg" alt="Photography 11" loading="lazy" /></div>
+      <div class="photo-item"><img src="images/photographyPortfolio/photo12.jpg" alt="Photography 12" loading="lazy" /></div>
+      <div class="photo-item"><img src="images/photographyPortfolio/photo13.jpg" alt="Photography 13" loading="lazy" /></div>
+      <div class="photo-item"><img src="images/photographyPortfolio/photo14.jpg" alt="Photography 14" loading="lazy" /></div>
+      <div class="photo-item"><img src="images/photographyPortfolio/photo15.jpg" alt="Photography 15" loading="lazy" /></div>
+      <div class="photo-item"><img src="images/photographyPortfolio/photo16.jpg" alt="Photography 16" loading="lazy" /></div>
+      <div class="photo-item"><img src="images/photographyPortfolio/photo17.jpg" alt="Photography 17" loading="lazy" /></div>
+      <div class="photo-item"><img src="images/photographyPortfolio/photo18.jpg" alt="Photography 18" loading="lazy" /></div>
+      <div class="photo-item"><img src="images/photographyPortfolio/photo19.jpg" alt="Photography 19" loading="lazy" /></div>
+      <div class="photo-item"><img src="images/photographyPortfolio/photo20.jpg" alt="Photography 20" loading="lazy" /></div>
+      <div class="photo-item"><img src="images/photographyPortfolio/photo21.jpg" alt="Photography 21" loading="lazy" /></div>
+      <div class="photo-item"><img src="images/photographyPortfolio/photo22.jpg" alt="Photography 22" loading="lazy" /></div>
+      <div class="photo-item"><img src="images/photographyPortfolio/photo23.jpg" alt="Photography 23" loading="lazy" /></div>
+      <div class="photo-item"><img src="images/photographyPortfolio/photo24.jpg" alt="Photography 24" loading="lazy" /></div>
+      <div class="photo-item"><img src="images/photographyPortfolio/photo25.jpg" alt="Photography 25" loading="lazy" /></div>
+      <div class="photo-item"><img src="images/photographyPortfolio/photo26.jpg" alt="Photography 26" loading="lazy" /></div>
+      <div class="photo-item"><img src="images/photographyPortfolio/photo27.jpg" alt="Photography 27" loading="lazy" /></div>
+      <div class="photo-item"><img src="images/photographyPortfolio/photo28.jpg" alt="Photography 28" loading="lazy" /></div>
+      <div class="photo-item"><img src="images/photographyPortfolio/photo29.jpg" alt="Photography 29" loading="lazy" /></div>
+      <div class="photo-item"><img src="images/photographyPortfolio/photo30.jpg" alt="Photography 30" loading="lazy" /></div>
+      <div class="photo-item"><img src="images/photographyPortfolio/photo31.jpg" alt="Photography 31" loading="lazy" /></div>
     </div>
   </section>
 
+  <script src="masonry.js"></script>
 </body>
 </html>
