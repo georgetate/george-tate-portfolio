@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>George Tate</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600&family=Cormorant+Garamond:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --cream: #f9f6f0;
+      --ink: #1a1814;
+      --ink-light: #3a3630;
+      --ink-mid: #2c2820;
+      --line-thick: 4px;
+      --line-thin: 3px;
+      --content-width: 860px;
+      --content-padding: 40px;
+    }
+
+    html {
+      background-color: var(--cream);
+      color: var(--ink);
+      font-family: 'EB Garamond', 'Cormorant Garamond', Georgia, serif;
+      font-size: 18px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      background-color: var(--cream);
+      max-width: var(--content-width);
+      margin: 0 auto;
+      padding: 0 var(--content-padding) 100px;
+    }
+
+    /* ── Header ── */
+    .site-header {
+      padding-top: 0.5in;
+      text-align: center;
+      margin-bottom: 72px;
+    }
+
+    .title-rule {
+      display: block;
+      width: fit-content;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .title-rule::before,
+    .title-rule::after {
+      content: '';
+      display: block;
+      height: var(--line-thick);
+      background-color: var(--ink);
+      /* extend ~18px beyond the text on each side */
+      margin-left: -18px;
+      margin-right: -18px;
+    }
+
+    .title-rule::before {
+      margin-bottom: 14px;
+    }
+
+    .title-rule::after {
+      margin-top: 14px;
+    }
+
+    h1.name {
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: clamp(2.6rem, 5vw, 3.6rem);
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      color: var(--ink);
+      white-space: nowrap;
+    }
+
+    /* ── Sections ── */
+    .section {
+      margin-bottom: 72px;
+    }
+
+    .section-heading {
+      text-align: center;
+      margin-bottom: 48px;
+      position: relative;
+    }
+
+    .section-heading::before,
+    .section-heading::after {
+      content: '';
+      display: block;
+      height: var(--line-thin);
+      background-color: var(--ink);
+      margin-left: calc(-1 * var(--content-padding));
+      margin-right: calc(-1 * var(--content-padding));
+    }
+
+    .section-heading::before {
+      margin-bottom: 18px;
+    }
+
+    .section-heading::after {
+      margin-top: 18px;
+    }
+
+    .section-heading h2 {
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: clamp(1.4rem, 2.8vw, 1.9rem);
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      color: var(--ink);
+    }
+
+    /* ── Projects ── */
+    .projects-list {
+      display: flex;
+      flex-direction: column;
+      gap: 64px;
+    }
+
+    .project {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    .project-name {
+      display: inline-block;
+      align-self: flex-start;
+      width: fit-content;
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: clamp(1.1rem, 2.2vw, 1.4rem);
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      color: var(--ink);
+      border-bottom: 1.5px solid var(--ink);
+      padding: 0 6px 5px;
+    }
+
+    /* ── Project images: vertical stack ── */
+    .project-images {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .project-images img {
+      display: block;
+      width: 100%;
+      max-width: 640px;
+      height: auto;
+      border-radius: 4px;
+      border: 1px solid rgba(26, 24, 20, 0.18);
+      box-shadow: 0 2px 12px rgba(26, 24, 20, 0.08);
+    }
+
+    /* ── Photography grid ── */
+    .photo-grid {
+      position: relative;
+    }
+
+    .photo-item {
+      display: block;
+    }
+
+    .photo-item img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 4px;
+      border: 1px solid rgba(26, 24, 20, 0.18);
+      box-shadow: 0 2px 10px rgba(26, 24, 20, 0.07);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 700px) {
+      :root {
+        --content-padding: 22px;
+      }
+
+
+      .project-images img {
+        max-width: 100%;
+      }
+      .site-header {
+        padding-top: 0.4in;
+        margin-bottom: 52px;
+      }
+
+      .section {
+        margin-bottom: 52px;
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- ── Header ── -->
+  <header class="site-header">
+    <span class="title-rule">
+      <h1 class="name">George Tate</h1>
+    </span>
+  </header>
+
+  <!-- ── Projects ── -->
+  <section class="section" id="projects">
+    <div class="section-heading">
+      <h2>Projects</h2>
+    </div>
+
+    <div class="projects-list">
+
+      <!-- Honda Christmas Special Restoration -->
+      <div class="project">
+        <span class="project-name">Honda Christmas Special Restoration</span>
+        <div class="project-images">
+          <img src="images/hondaChristmasSpecial/miniBike1.jpg" alt="Honda Christmas Special Restoration — 1" />
+          <img src="images/hondaChristmasSpecial/miniBike2.jpg" alt="Honda Christmas Special Restoration — 2" loading="lazy" />
+          <img src="images/hondaChristmasSpecial/miniBike3.jpg" alt="Honda Christmas Special Restoration — 3" loading="lazy" />
+          <img src="images/hondaChristmasSpecial/miniBike4.jpg" alt="Honda Christmas Special Restoration — 4" loading="lazy" />
+        </div>
+      </div>
+
+      <!-- Japanese Wood Joinery Coffee Table -->
+      <div class="project">
+        <span class="project-name">Japanese Wood Joinery Coffee Table</span>
+        <div class="project-images">
+          <img src="images/japaneseWoodJoinery/table1.jpg" alt="Japanese Wood Joinery Coffee Table — 1" loading="lazy" />
+          <img src="images/japaneseWoodJoinery/table2.jpg" alt="Japanese Wood Joinery Coffee Table — 2" loading="lazy" />
+          <img src="images/japaneseWoodJoinery/table3.jpg" alt="Japanese Wood Joinery Coffee Table — 3" loading="lazy" />
+          <img src="images/japaneseWoodJoinery/table4.jpg" alt="Japanese Wood Joinery Coffee Table — 4" loading="lazy" />
+          <img src="images/japaneseWoodJoinery/table5.jpg" alt="Japanese Wood Joinery Coffee Table — 5" loading="lazy" />
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── Photography ── -->
+  <section class="section" id="photography">
+    <div class="section-heading">
+      <h2>Photography</h2>
+    </div>
+
+    <div class="photo-grid">
+      <div class="photo-item"><img src="images/photographyPortfolio/photo1.jpg"  alt="Photography 1"  loading="lazy" /></div>
+      <div class="photo-item"><img src="images/photographyPortfolio/photo2.jpg"  alt="Photography 2"  loading="lazy" /></div>
+      <div class="photo-item"><img src="images/photographyPortfolio/photo3.jpg"  alt="Photography 3"  loading="lazy" /></div>
+      <div class="photo-item"><img src="images/photographyPortfolio/photo4.jpg"  alt="Photography 4"  loading="lazy" /></div>
+      <div class="photo-item"><img src="images/photographyPortfolio/photo5.jpg"  alt="Photography 5"  loading="lazy" /></div>
+      <div class="photo-item"><img src="images/photographyPortfolio/photo6.jpg"  alt="Photography 6"  loading="lazy" /></div>
+      <div class="photo-item"><img src="images/photographyPortfolio/photo7.jpg"  alt="Photography 7"  loading="lazy" /></div>
+      <div class="photo-item"><img src="images/photographyPortfolio/photo8.jpg"  alt="Photography 8"  loading="lazy" /></div>
+      <div class="photo-item"><img src="images/photographyPortfolio/photo9.jpg"  alt="Photography 9"  loading="lazy" /></div>
+      <div class="photo-item"><img src="images/photographyPortfolio/photo10.jpg" alt="Photography 10" loading="lazy" /></div>
+      <div class="photo-item"><img src="images/photographyPortfolio/photo11.jpg" alt="Photography 11" loading="lazy" /></div>
+      <div class="photo-item"><img src="images/photographyPortfolio/photo12.jpg" alt="Photography 12" loading="lazy" /></div>
+      <div class="photo-item"><img src="images/photographyPortfolio/photo13.jpg" alt="Photography 13" loading="lazy" /></div>
+      <div class="photo-item"><img src="images/photographyPortfolio/photo14.jpg" alt="Photography 14" loading="lazy" /></div>
+      <div class="photo-item"><img src="images/photographyPortfolio/photo15.jpg" alt="Photography 15" loading="lazy" /></div>
+      <div class="photo-item"><img src="images/photographyPortfolio/photo16.jpg" alt="Photography 16" loading="lazy" /></div>
+      <div class="photo-item"><img src="images/photographyPortfolio/photo17.jpg" alt="Photography 17" loading="lazy" /></div>
+      <div class="photo-item"><img src="images/photographyPortfolio/photo18.jpg" alt="Photography 18" loading="lazy" /></div>
+      <div class="photo-item"><img src="images/photographyPortfolio/photo19.jpg" alt="Photography 19" loading="lazy" /></div>
+      <div class="photo-item"><img src="images/photographyPortfolio/photo20.jpg" alt="Photography 20" loading="lazy" /></div>
+      <div class="photo-item"><img src="images/photographyPortfolio/photo21.jpg" alt="Photography 21" loading="lazy" /></div>
+      <div class="photo-item"><img src="images/photographyPortfolio/photo22.jpg" alt="Photography 22" loading="lazy" /></div>
+      <div class="photo-item"><img src="images/photographyPortfolio/photo23.jpg" alt="Photography 23" loading="lazy" /></div>
+      <div class="photo-item"><img src="images/photographyPortfolio/photo24.jpg" alt="Photography 24" loading="lazy" /></div>
+      <div class="photo-item"><img src="images/photographyPortfolio/photo25.jpg" alt="Photography 25" loading="lazy" /></div>
+      <div class="photo-item"><img src="images/photographyPortfolio/photo26.jpg" alt="Photography 26" loading="lazy" /></div>
+      <div class="photo-item"><img src="images/photographyPortfolio/photo27.jpg" alt="Photography 27" loading="lazy" /></div>
+      <div class="photo-item"><img src="images/photographyPortfolio/photo28.jpg" alt="Photography 28" loading="lazy" /></div>
+      <div class="photo-item"><img src="images/photographyPortfolio/photo29.jpg" alt="Photography 29" loading="lazy" /></div>
+      <div class="photo-item"><img src="images/photographyPortfolio/photo30.jpg" alt="Photography 30" loading="lazy" /></div>
+      <div class="photo-item"><img src="images/photographyPortfolio/photo31.jpg" alt="Photography 31" loading="lazy" /></div>
+    </div>
+  </section>
+
+  <script src="masonry.js"></script>
+</body>
+</html>

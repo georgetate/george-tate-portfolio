@@ -1,0 +1,597 @@
+/* ── Reset ──────────────────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* --background-white: #f9f6f0;      /* page background */
+/* --scrollables-cream: #f5edde;     /* background of each project section */
+/* --header-footer-cream: #efe4cf;   fill between the header/footer bars */
+/* ── Design tokens ──────────────────────────────────────────────────────── */
+:root {
+  /* Colors */
+  --background-white: #f3f2ee;      /* page background */
+  --scrollables-cream: #f4efe2a1;     /* background of each project section */
+  --header-footer-cream: #efddbc5e;   /* fill between the header/footer bars */
+  --ink: #1a1814;                   /* primary text and bar color */
+  --ink-light: #3a3630;             /* secondary text and thin divider color */
+  --ink-icon: #ff880190;
+
+  /* Bars — thick bars are used in the header/footer;
+     section bars use calc(line-thick / 1.25) = 3.2px */
+  --line-thick: 4px;
+
+  /* Layout */
+  --content-padding: 40px;          /* left/right padding inside each section */
+  --header-edge-margin: 40px;       /* left padding inside the header bar */
+  --section-gap: 150px;             /* vertical space between sections */
+
+  /* Header bar spacing */
+  --header-rule-gap: 14px;          /* gap between the bar line and the name text */
+
+  /* Gallery dimensions */
+  --scrollable-media-height: clamp(420px, 80vw, 680px); /* height of all scroll areas */
+  --photo-gap: 20px;                                     /* gap between images in a gallery */
+  --project-copy-width: clamp(300px, 32vw, 460px);      /* width of all description columns */
+  --copy-side-padding: clamp(16px, 2vw, 24px);          /* padding between copy and the vertical divider bar */
+
+  /* Photo masonry row height — each of the two rows is half the total height
+     minus one gap, so the two rows together equal --scrollable-media-height */
+  --photo-row-height: calc((var(--scrollable-media-height) - var(--photo-gap)) / 2);
+
+  /* Title sizing (used to calculate footer bar spacing) */
+  --title-size: clamp(2.6rem, 5vw, 3.6rem);
+}
+
+
+/* ── Base ───────────────────────────────────────────────────────────────── */
+html {
+  background-color: var(--background-white);
+  color: var(--ink);
+  font-family: 'EB Garamond', 'Cormorant Garamond', Georgia, serif;
+  font-size: 18px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0 0 .4in;
+}
+
+
+/* ── Header ─────────────────────────────────────────────────────────────── */
+.site-header {
+  padding-top: .4in;
+  text-align: left;
+  margin-bottom: calc(var(--section-gap)/1.75);
+}
+
+/* Cream band with a thick horizontal bar above and below.
+   ::before = top bar, ::after = bottom bar.
+   The cream fill between them comes from the element's own background. */
+.title-rule {
+  background-color: var(--header-footer-cream);
+  display: block;
+  width: 100%;
+  margin: 0;
+  position: relative;
+}
+
+.title-rule::before,
+.title-rule::after {
+  content: '';
+  display: block;
+  height: var(--line-thick);
+  background-color: var(--ink);
+  width: 100%;
+}
+
+.title-rule::before {
+  margin-bottom: var(--header-rule-gap); /* gap between top bar and name */
+}
+
+.title-rule::after {
+  margin-top: var(--header-rule-gap);    /* gap between name and bottom bar */
+}
+
+
+/* ── Footer ─────────────────────────────────────────────────────────────── */
+/* Mirrors the header: cream fill with a thick bar above and below.
+   ::before margin-bottom sizes the cream gap to match the header's height. */
+.footer-rule {
+  background-color: var(--header-footer-cream);
+  display: block;
+  width: 100%;
+  margin: calc(var(--section-gap)/1.75) 0 0;
+}
+
+.footer-rule::before,
+.footer-rule::after {
+  content: '';
+  display: block;
+  height: var(--line-thick);
+  background-color: var(--ink);
+  width: 100%;
+}
+
+.footer-rule::before {
+  /* pushes the bottom bar down to match the header's interior height */
+  margin-bottom: calc(var(--header-rule-gap)*2 + var(--title-size));
+}
+
+
+/* ── Header inner layout ────────────────────────────────────────────────── */
+/* Flex row: name on the left, subtitle grid on the right */
+.header-inner {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  padding: 0 var(--header-edge-margin);
+}
+
+h1.name {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: clamp(1.0rem, 5vw, 2.5rem);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+/* "Art & Engineering" subtitle.
+   Two-column grid so the & sits centered between Art's right edge and
+   Engineering's right edge:
+     col 1 = Art's intrinsic width
+     col 2 = the remaining width (Engineering − Art)
+   Centering & in col 2 lands it at the midpoint of both words. */
+.subtitle {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: clamp(0.5rem, 1.15vw, 0.8rem);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink);
+  line-height: 1.6;
+  text-align: left;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.subtitle:hover {
+  color: var(--ink-icon);
+}
+
+.subtitle-art         { grid-column: 1; grid-row: 1; }
+.subtitle-amp         { grid-column: 2; grid-row: 1; text-align: center; }
+.subtitle-engineering { grid-column: 1 / 3; grid-row: 2; }
+
+.icon-block {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-left: auto;
+}
+
+.icon-item svg {
+  display: block;
+  height: clamp(1.0rem, 5vw, 2.5rem);
+  width: auto;
+  color: var(--ink);
+  transition: color 0.2s ease;
+}
+
+.icon-item:hover svg {
+  color: var(--ink-icon);
+}
+
+/* ── Project section container ──────────────────────────────────────────── */
+/* Cream background band. Thin horizontal bars above and below are drawn
+   with ::before and ::after, extending edge-to-edge via negative margins. */
+#projects {
+  scroll-margin-top: 60px;
+}
+
+.projects {
+  background-color: var(--scrollables-cream);
+  position: relative;
+  padding: 0 var(--content-padding);
+}
+
+.projects + .projects {
+  margin-top: var(--section-gap);
+}
+
+/* Top bar (::before) and bottom bar (::after) */
+.projects::before,
+.projects::after {
+  content: '';
+  display: block;
+  height: calc(var(--line-thick)/1.25); /* 3.2px — slightly thinner than header bars */
+  background-color: var(--ink-light);
+  margin-left: calc(-1 * var(--content-padding));   /* bleed to left edge */
+  margin-right: calc(-1 * var(--content-padding));  /* bleed to right edge */
+}
+
+.projects::before {
+  margin-bottom: 50px; /* space between top bar and gallery content */
+}
+
+.projects::after {
+  margin-top: 38px;    /* space between gallery content and bottom bar */
+}
+
+
+/* ── Project gallery layout ─────────────────────────────────────────────── */
+/* Two-column grid: description column (fixed max) | scroll area (fills rest).
+   .copy-right reverses the column order so the description sits on the right. */
+.project-gallery-layout {
+  display: grid;
+  grid-template-columns: minmax(0, var(--project-copy-width)) minmax(0, 1fr);
+  align-items: start;
+}
+
+.projects.copy-right .project-gallery-layout {
+  grid-template-columns: minmax(0, 1fr) minmax(0, var(--project-copy-width));
+}
+
+
+/* ── Project gallery description panel ──────────────────────────────────── */
+/* Stretches to match the scroll area height (align-self: stretch).
+   ::after draws the vertical divider bar between copy and scroll.
+   ::before draws a short horizontal rule at the bottom of the copy. */
+.project-gallery-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 14px;
+  align-self: stretch;
+  position: relative;
+  padding-bottom: 12px;
+  padding-right: var(--copy-side-padding);
+}
+
+/* Vertical divider bar (right edge of copy panel, or left for copy-right) */
+.project-gallery-copy::after {
+  content: '';
+  position: absolute;
+  top: -12px; /* extends up to align with the section's top bar */
+  right: 0;
+  bottom: 0;
+  width: calc(var(--line-thick)/1.25);
+  background-color: var(--ink-light);
+}
+
+/* Horizontal rule at the bottom of the copy text */
+.project-gallery-copy::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: var(--copy-side-padding);
+  bottom: 12px;
+  height: 1.5px;
+  background-color: var(--ink);
+}
+
+/* copy-right variant: flip padding and bar sides */
+.projects.copy-right .project-gallery-copy {
+  padding-right: 0;
+  padding-left: var(--copy-side-padding);
+  text-align: right;
+  align-items: flex-end;
+}
+
+.projects.copy-right .project-gallery-copy::after {
+  right: auto;
+  left: 0;
+}
+
+.projects.copy-right .project-gallery-copy::before {
+  left: var(--copy-side-padding);
+  right: 0;
+}
+
+/* Unused at desktop; present in markup for potential future use */
+.project-gallery-divider {
+  display: none;
+}
+
+
+/* ── Project gallery scroll area ────────────────────────────────────────── */
+/* Horizontally scrollable container. The track inside holds all image items
+   laid out in a single flex row. */
+.project-gallery-scroll {
+  min-width: 0;
+  overflow-x: auto;
+  padding-bottom: 12px;
+  scroll-snap-type: x proximity;
+  scroll-padding-left: var(--photo-gap);
+  position: relative;
+}
+
+.projects.copy-right .project-gallery-scroll {
+  scroll-padding-left: 0;
+  scroll-padding-right: var(--photo-gap);
+}
+
+/* Inner flex row — all images sit in a single horizontal line */
+.project-gallery-track {
+  display: flex;
+  gap: var(--photo-gap);
+  width: max-content;
+  align-items: flex-start;
+  padding-left: var(--photo-gap);
+}
+
+.projects.copy-right .project-gallery-track {
+  padding-left: 0;
+  padding-right: var(--photo-gap);
+}
+
+.project-gallery-item {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+}
+
+.project-gallery-item img {
+  display: block;
+  width: auto;
+  max-width: none;
+  height: var(--scrollable-media-height);
+  border-radius: 4px;
+  border: 1px solid rgba(26, 24, 20, 0.18);
+  box-shadow: 0 2px 12px rgba(26, 24, 20, 0.08);
+}
+
+
+
+/* ── Typography — project name and description ──────────────────────────── */
+.project-name {
+  display: inline-block;
+  width: fit-content;
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: clamp(1.1rem, 2.2vw, 1.4rem);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  border-top: 1.5px solid var(--ink);
+  border-bottom: 1.5px solid var(--ink);
+  padding: 5px 6px;
+}
+
+/* Full-width name when inside a copy panel */
+.project-gallery-copy .project-name,
+.photo-gallery-copy .project-name {
+  display: block;
+  width: 100%;
+  max-width: none;
+  padding: 5px 0;
+}
+
+.project-description {
+  font-size: 1rem;
+  line-height: 1.55;
+  color: var(--ink-light);
+}
+
+
+/* ── Project gallery — narrow screen ────────────────────────────────────── */
+/* Stack scroll area above copy. Side vertical bars are replaced by
+   left/right border on the scroll container. */
+@media (max-width: 960px) {
+  .project-gallery-layout,
+  .projects.copy-right .project-gallery-layout {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  /* Scroll area moves to the top */
+  .project-gallery-scroll {
+    order: 1;
+    padding-top: 12px;
+    scroll-padding-left: var(--photo-gap);
+    scroll-padding-right: var(--photo-gap);
+    border-left: calc(var(--line-thick)/1.25) solid var(--ink-light);   /* left vertical bar */
+    border-right: calc(var(--line-thick)/1.25) solid var(--ink-light);  /* right vertical bar */
+  }
+
+  .projects.copy-right .project-gallery-scroll {
+    scroll-padding-left: var(--photo-gap);
+    scroll-padding-right: var(--photo-gap);
+  }
+
+  /* Copy panel moves to the bottom; pseudo-element bars hidden */
+  .project-gallery-copy {
+    order: 2;
+    gap: 18px;
+    padding-bottom: 0;
+    padding-right: 0;
+    padding-left: 0;
+  }
+
+  .project-gallery-track,
+  .projects.copy-right .project-gallery-track {
+    padding-left: var(--photo-gap);
+    padding-right: var(--photo-gap);
+  }
+
+  .project-gallery-item {
+    scroll-margin-left: var(--photo-gap);
+    scroll-margin-right: var(--photo-gap);
+  }
+
+  .project-gallery-item:first-child {
+    scroll-snap-align: start;
+  }
+
+  .project-gallery-item:last-child {
+    scroll-snap-align: end;
+  }
+
+  .projects.copy-right .project-name {
+    margin-left: calc(-1 * var(--copy-side-padding));
+    width: calc(100% + var(--copy-side-padding));
+  }
+
+  /* Hide pseudo-element vertical bar and bottom rule on narrow screens */
+  .project-gallery-copy::before,
+  .project-gallery-copy::after {
+    display: none;
+  }
+}
+
+
+/* ── Photo gallery layout ───────────────────────────────────────────────── */
+/* Same two-column structure as project gallery but description always on left */
+.photo-gallery-layout {
+  display: grid;
+  grid-template-columns: minmax(0, var(--project-copy-width)) minmax(0, 1fr);
+  align-items: start;
+}
+
+
+/* ── Photo gallery description panel ────────────────────────────────────── */
+/* Mirrors project-gallery-copy: vertical divider bar via ::after,
+   bottom horizontal rule via ::before. */
+.photo-gallery-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-self: stretch;
+  justify-content: flex-start;
+  position: relative;
+  padding-bottom: 12px;
+  padding-right: var(--copy-side-padding);
+}
+
+/* Vertical divider bar (right edge of copy panel) */
+.photo-gallery-copy::after {
+  content: '';
+  position: absolute;
+  top: -12px; /* extends up to align with the section's top bar */
+  right: 0;
+  bottom: 0;
+  width: calc(var(--line-thick)/1.25);
+  background-color: var(--ink-light);
+}
+
+/* Horizontal rule at the bottom of the copy text */
+.photo-gallery-copy::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: var(--copy-side-padding);
+  bottom: 12px;
+  height: 1.5px;
+  background-color: var(--ink);
+}
+
+
+/* ── Photo gallery scroll area ──────────────────────────────────────────── */
+/* Horizontally scrollable container. The track inside holds all images and
+   grows rightward as content is added. */
+.photo-gallery-scroll {
+  min-width: 0;
+  overflow-x: auto;
+  padding-bottom: 12px;
+  scroll-snap-type: x proximity;
+  scroll-padding-left: var(--photo-gap);
+  position: relative;
+}
+
+/* Fallback layout: 2-row CSS grid that fills top-to-bottom then overflows
+   rightward. Images flow into columns sequentially. Adding more images
+   extends the horizontal scroll width automatically.
+   This is the default state — no JS required. */
+.photo-gallery-track {
+  display: grid;
+  grid-template-rows: repeat(2, var(--photo-row-height));
+  grid-auto-flow: column;
+  grid-auto-columns: auto;
+  gap: var(--photo-gap);
+  width: max-content;
+  padding-left: var(--photo-gap);
+}
+
+/* Fallback image styles — target direct img children (only present before JS runs) */
+.photo-gallery-track > img {
+  display: block;
+  height: var(--photo-row-height);
+  width: auto;
+  border-radius: 4px;
+  border: 1px solid rgba(26, 24, 20, 0.18);
+  box-shadow: 0 2px 10px rgba(26, 24, 20, 0.07);
+}
+
+/* JS-enhanced layout: once horizontal-masonry.js runs and adds .is-ready,
+   the track switches to a flex column of two aspect-ratio-balanced rows. */
+.js-horizontal-masonry.is-ready .photo-gallery-track {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-height: calc((var(--photo-row-height) * 2) + var(--photo-gap));
+}
+
+/* Each row is a horizontal flex of images (JS-enhanced state only) */
+.photo-gallery-row {
+  display: flex;
+  gap: var(--photo-gap);
+  flex: 0 0 auto;
+}
+
+.photo-gallery-item {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+}
+
+.photo-gallery-item img {
+  display: block;
+  width: auto;
+  height: var(--photo-row-height);
+  border-radius: 4px;
+  border: 1px solid rgba(26, 24, 20, 0.18);
+  box-shadow: 0 2px 10px rgba(26, 24, 20, 0.07);
+}
+
+
+/* ── Photo gallery — narrow screen ──────────────────────────────────────── */
+/* Same stacking pattern as project gallery narrow layout */
+@media (max-width: 960px) {
+  .photo-gallery-layout {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  /* Scroll area moves to the top, with left/right vertical bars */
+  .photo-gallery-scroll {
+    order: 1;
+    padding-top: 12px;
+    scroll-padding-left: var(--photo-gap);
+    scroll-padding-right: var(--photo-gap);
+    border-left: calc(var(--line-thick)/1.25) solid var(--ink-light);   /* left vertical bar */
+    border-right: calc(var(--line-thick)/1.25) solid var(--ink-light);  /* right vertical bar */
+  }
+
+  /* Copy panel moves to the bottom; pseudo-element bars hidden */
+  .photo-gallery-copy {
+    order: 2;
+    max-width: none;
+    gap: 18px;
+    padding-bottom: 0;
+    padding-right: 0;
+  }
+
+  .photo-gallery-track {
+    padding-left: var(--photo-gap);
+    padding-right: var(--photo-gap);
+  }
+
+  /* Hide pseudo-element vertical bar and bottom rule on narrow screens */
+  .photo-gallery-copy::before,
+  .photo-gallery-copy::after {
+    display: none;
+  }
+}
