@@ -1,0 +1,9 @@
+<!-- Seamless tile of one black wavy line, repeated in both directions to fill the header
+     and footer bands with op-art style stripes (black and white only, so the photos stay
+     the only color on the page).
+     Seamless because the curve starts and ends at the same height with the same slope:
+     the first control point (20,0) and the reflected one from T (60,14) both leave
+     their end points in the direction (+20,-7). -->
+<svg xmlns="http://www.w3.org/2000/svg" width="80" height="14" viewBox="0 0 80 14">
+  <path d="M0 7 Q20 0 40 7 T80 7" fill="none" stroke="#1a1814" stroke-width="3"/>
+</svg>

@@ -49,7 +49,10 @@
 html {
   background-color: var(--background-white);
   color: var(--ink);
-  font-family: 'EB Garamond', 'Cormorant Garamond', Georgia, serif;
+  /* Monospace like the Chotto Squarespace template the owner chose as the model
+     (Chotto's own font is served privately by Squarespace; Chivo Mono is a close free match).
+     Earlier serif stack: 'EB Garamond', 'Cormorant Garamond', Georgia, serif. */
+  font-family: 'Chivo Mono', ui-monospace, Menlo, monospace;
   font-size: 18px;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
@@ -78,14 +81,14 @@ a:focus-visible {
   margin-bottom: calc(var(--section-gap)/1.75);
 }
 
-/* Doodled band with a thick horizontal bar above and below.
+/* Patterned band with a thick horizontal bar above and below.
    ::before = top bar, ::after = bottom bar.
-   The doodle tile is the element's own background, so it fills the space between the bars. */
+   The pattern tile is the element's own background, so it fills the space between the bars. */
 .title-rule {
-  background: url("images/doodles/header-doodles.svg") repeat-x left center;
-  /* Scale the tile to the space between the bars so no doodle is cut off when the band
-     shrinks on narrow screens. */
-  background-size: auto calc(100% - 2 * var(--line-thick));
+  /* Op-art wavy stripes (images/patterns/wavy-lines.svg). The earlier doodle tile is
+     still in images/doodles/header-doodles.svg if it is wanted back. */
+  background: url("images/patterns/wavy-lines.svg") repeat left top;
+  background-size: 80px 14px;
   display: block;
   width: 100%;
   margin: 0;
@@ -106,13 +109,13 @@ a:focus-visible {
 
 
 /* ── Footer ─────────────────────────────────────────────────────────────── */
-/* Mirrors the header: doodle fill with a thick bar above and below.
-   ::before margin-bottom sizes the doodled gap to match the header's height. */
+/* Mirrors the header: pattern fill with a thick bar above and below.
+   ::before margin-bottom sizes the patterned gap to match the header's height. */
 .footer-rule {
-  background: url("images/doodles/header-doodles.svg") repeat-x left center;
-  /* Scale the tile to the space between the bars so no doodle is cut off when the band
-     shrinks on narrow screens. */
-  background-size: auto calc(100% - 2 * var(--line-thick));
+  /* Op-art wavy stripes (images/patterns/wavy-lines.svg). The earlier doodle tile is
+     still in images/doodles/header-doodles.svg if it is wanted back. */
+  background: url("images/patterns/wavy-lines.svg") repeat left top;
+  background-size: 80px 14px;
   display: block;
   width: 100%;
   margin: calc(var(--section-gap)/1.75) 0 0;
@@ -136,7 +139,7 @@ a:focus-visible {
 /* ── Header inner layout ────────────────────────────────────────────────── */
 /* Flex row: name on the left, subtitle grid on the right.
    Shrinks to its content and paints a paper patch that fades out on the right, so the
-   name sits on a clean background and the doodles take over past the subtitle. */
+   name sits on a clean background and the pattern takes over past the subtitle. */
 .header-inner {
   display: flex;
   align-items: center;
@@ -147,10 +150,10 @@ a:focus-visible {
 }
 
 h1.name {
-  font-family: 'EB Garamond', Georgia, serif;
+  font-family: 'Chivo Mono', ui-monospace, Menlo, monospace;
   font-size: clamp(1.0rem, 5vw, 2.5rem);
   font-weight: 500;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.02em;  /* monospace glyphs are already evenly spaced; 0.12em looked gappy */
   color: var(--ink);
   white-space: nowrap;
 }
@@ -164,7 +167,7 @@ h1.name {
 .subtitle {
   display: grid;
   grid-template-columns: auto 1fr;
-  font-family: 'EB Garamond', Georgia, serif;
+  font-family: 'Chivo Mono', ui-monospace, Menlo, monospace;
   font-size: clamp(0.5rem, 1.15vw, 0.8rem);
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -430,7 +433,7 @@ h1.name {
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  font-family: 'EB Garamond', Georgia, serif;
+  font-family: 'Chivo Mono', ui-monospace, Menlo, monospace;
   font-size: clamp(0.8rem, 1.4vw, 0.95rem);
   color: var(--ink-light);
   text-decoration: none;
@@ -460,7 +463,7 @@ h1.name {
   color: #fff;
   padding: 6px 16px;
   border-radius: 4px;
-  font-family: 'EB Garamond', Georgia, serif;
+  font-family: 'Chivo Mono', ui-monospace, Menlo, monospace;
   font-size: 0.9rem;
   letter-spacing: 0.05em;
   white-space: nowrap;
@@ -472,7 +475,7 @@ h1.name {
 .project-name {
   display: inline-block;
   width: fit-content;
-  font-family: 'EB Garamond', Georgia, serif;
+  font-family: 'Chivo Mono', ui-monospace, Menlo, monospace;
   font-size: clamp(1.1rem, 2.2vw, 1.4rem);
   font-weight: 400;
   letter-spacing: 0.04em;
@@ -493,7 +496,7 @@ h1.name {
 
 .project-dates {
   display: block;
-  font-family: 'EB Garamond', Georgia, serif;
+  font-family: 'Chivo Mono', ui-monospace, Menlo, monospace;
   font-size: clamp(0.75rem, 1.2vw, 0.9rem);
   font-style: italic;
   letter-spacing: 0.06em;
