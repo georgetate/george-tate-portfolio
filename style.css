@@ -170,9 +170,12 @@ h1.name {
   transition: color 0.2s ease;
 }
 
+/* Hover color change disabled at the owner's request (kept for possible later use).
+   Uncomment to restore.
 .subtitle:hover {
   color: var(--ink-icon);
 }
+*/
 
 .subtitle:focus-visible {
   color: var(--ink-icon);
