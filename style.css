@@ -104,7 +104,7 @@ a:focus-visible {
 
 
 /* ── Footer ─────────────────────────────────────────────────────────────── */
-/* Laser-beam band with a thick bar above and below, thinner than the header.
+/* Plain band with a thick bar above and below, thinner than the header.
    .footer-pattern (between the ::before and ::after bars) sets the band height. */
 .footer-rule {
   display: block;
@@ -137,29 +137,6 @@ a:focus-visible {
   align-items: center;
   gap: 28px;
   padding-left: var(--header-edge-margin);
-}
-
-/* Laser-beam bands (header and footer). laser-beams.js fills each with an SVG of
-   beams bouncing between the bars; the beams start by dying into a bar, which is
-   what separates the pattern from the name (no vertical divider). The SVG is sized
-   to the band, so the band itself only has to stretch between the two bars. */
-.header-pattern {
-  flex: 1;
-  align-self: stretch;
-}
-
-.header-pattern,
-.footer-pattern {
-  position: relative;
-  color: var(--ink);  /* beams use currentColor */
-}
-
-.js-laser-beams svg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  display: block;
 }
 
 h1.name {
