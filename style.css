@@ -33,7 +33,7 @@
   /* Gallery dimensions */
   --scrollable-media-height: clamp(420px, 80vw, 680px); /* height of all scroll areas */
   --photo-gap: 20px;                                     /* gap between images in a gallery */
-  --project-copy-width: clamp(300px, 32vw, 460px);      /* width of all description columns */
+  --project-copy-width: clamp(320px, 35vw, 460px);      /* width of all description columns (35vw keeps the hermes story beside its video at mid widths) */
   --copy-side-padding: clamp(16px, 2vw, 24px);          /* padding between copy and the vertical divider bar */
 
   /* Photo masonry row height — each of the two rows is half the total height
@@ -81,14 +81,9 @@ a:focus-visible {
   margin-bottom: calc(var(--section-gap)/1.75);
 }
 
-/* Patterned band with a thick horizontal bar above and below.
-   ::before = top bar, ::after = bottom bar.
-   The pattern tile is the element's own background, so it fills the space between the bars. */
+/* Header band with a thick horizontal bar above and below.
+   ::before = top bar, ::after = bottom bar. The pattern is .header-pattern, inside. */
 .title-rule {
-  /* Op-art wavy stripes (images/patterns/wavy-lines.svg). The earlier doodle tile is
-     still in images/doodles/header-doodles.svg if it is wanted back. */
-  background: url("images/patterns/wavy-lines.svg") repeat left top;
-  background-size: 80px 14px;
   display: block;
   width: 100%;
   margin: 0;
@@ -109,8 +104,8 @@ a:focus-visible {
 
 
 /* ── Footer ─────────────────────────────────────────────────────────────── */
-/* Mirrors the header: pattern fill with a thick bar above and below.
-   ::before margin-bottom sizes the patterned gap to match the header's height. */
+/* Wavy-line band with a thick bar above and below, thinner than the header.
+   ::before margin-bottom sets the height of the patterned gap. */
 .footer-rule {
   /* Op-art wavy stripes (images/patterns/wavy-lines.svg). The earlier doodle tile is
      still in images/doodles/header-doodles.svg if it is wanted back. */
@@ -131,25 +126,55 @@ a:focus-visible {
 }
 
 .footer-rule::before {
-  /* pushes the bottom bar down to match the header's interior height */
-  margin-bottom: calc(var(--header-rule-gap)*2 + var(--title-size));
+  /* pushes the bottom bar down; about 40% of the header's interior height so the
+     footer reads as a lighter closing band */
+  margin-bottom: calc(var(--title-size) * 0.6);
 }
 
 
 /* ── Header inner layout ────────────────────────────────────────────────── */
-/* Flex row: name on the left, subtitle grid on the right.
-   Shrinks to its content and paints a paper patch that fades out on the right, so the
-   name sits on a clean background and the pattern takes over past the subtitle. */
+/* Flex row: name, subtitle grid, then the pattern filling the rest of the band.
+   The vertical gap above and below the name is the name's own padding (not this
+   row's), so the stretched pattern spans the full height between the two bars. */
 .header-inner {
   display: flex;
   align-items: center;
   gap: 28px;
-  width: fit-content;
-  padding: var(--header-rule-gap) 110px var(--header-rule-gap) var(--header-edge-margin);
-  background: linear-gradient(to right, var(--background-white) calc(100% - 90px), transparent);
+  padding-left: var(--header-edge-margin);
+}
+
+/* Diagonal lines that run into the top and bottom bars and stop there. Lines that
+   hit the vertical bar on the left bounce off it instead: the ::before triangle
+   draws the mirrored lines. A line meeting the bar at height y travels a distance
+   (band height - y) before reaching the bottom bar, so every bounced segment lies in
+   the lower-left triangle whose legs both equal the band height.
+   Both layers anchor their tiles at the same top-left point, and the two tiles
+   cross the bar at the same heights, so each bounce meets its line exactly. */
+.header-pattern {
+  flex: 1;
+  align-self: stretch;
+  position: relative;
+  border-left: var(--line-thick) solid var(--ink);
+  background: url("images/patterns/diagonal-lines.svg") repeat left top;
+  background-size: 16px 16px;
+}
+
+.header-pattern::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  aspect-ratio: 1;
+  background: url("images/patterns/diagonal-lines-mirrored.svg") repeat left top;
+  background-size: 16px 16px;
+  /* Triangle widened by a 3px strip along its long edge: the bounce from the top corner
+     runs exactly along that edge, and a plain triangle would clip it to half its width. */
+  clip-path: polygon(0 0, 3px 0, 100% calc(100% - 3px), 100% 100%, 0 100%);
 }
 
 h1.name {
+  padding: var(--header-rule-gap) 0;  /* sets the header band height; see .header-inner */
   font-family: 'Chivo Mono', ui-monospace, Menlo, monospace;
   font-size: clamp(1.0rem, 5vw, 2.5rem);
   font-weight: 500;
@@ -510,8 +535,11 @@ h1.name {
 }
 
 .project-description {
-  font-size: 1rem;
-  line-height: 1.55;
+  /* Monospace glyphs are wider than the old serif's, so the size dropped from 1rem to keep
+     the longest story (hermes) within the height of its photo column. Between about 960px and
+     1350px the copy column narrows (32vw), so the size also eases down with the viewport. */
+  font-size: clamp(0.68rem, 0.25rem + 0.75vw, 0.8rem);
+  line-height: 1.6;
   color: var(--ink-light);
   width: 100%;
 }

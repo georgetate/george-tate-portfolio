@@ -1,0 +1,8 @@
+<!-- Seamless tile of "/" diagonal lines for the header pattern. The corner stubs finish
+     the neighbouring tiles' lines so the stripes stay unbroken when the tile repeats.
+     At x = 0 the line crosses y = 0 and y = 16, the same points where the mirrored tile
+     (diagonal-lines-mirrored.svg) crosses, so the "bounced" lines meet these exactly at
+     the vertical bar. -->
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+  <path d="M-2 2 L2 -2 M0 16 L16 0 M14 18 L18 14" fill="none" stroke="#1a1814" stroke-width="2.5"/>
+</svg>
