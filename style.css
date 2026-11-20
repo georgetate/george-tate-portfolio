@@ -5,18 +5,18 @@
   padding: 0;
 }
 
-/* --background-white: #f9f6f0;      /* page background */
-/* --scrollables-cream: #f5edde;     /* background of each project section */
-/* --header-footer-cream: #efe4cf;   fill between the header/footer bars */
+/* Earlier warm palette, kept for reference (cream sections and bands, orange hovers):
+   --background-white: #f3f2ee;  --scrollables-cream: #f4efe2a1;
+   --header-footer-cream: #efddbc5e;  --ink-icon: #ff880190; */
 /* ── Design tokens ──────────────────────────────────────────────────────── */
 :root {
   /* Colors */
-  --background-white: #f3f2ee;      /* page background */
-  --scrollables-cream: #f4efe2a1;     /* background of each project section */
-  --header-footer-cream: #efddbc5e;   /* fill between the header/footer bars */
+  /* Neutral on purpose: only the photos bring color, so every non-photo color is
+     paper, ink, or a grey between them. */
+  --background-white: #ffffff;      /* page background: pure white, like the Chotto reference */
   --ink: #1a1814;                   /* primary text and bar color */
   --ink-light: #3a3630;             /* secondary text and thin divider color */
-  --ink-icon: #ff880190;
+  --ink-icon: #8c877e;              /* hover and focus grey */
 
   /* Bars — thick bars are used in the header/footer;
      section bars use calc(line-thick / 1.25) = 3.2px */
@@ -78,11 +78,14 @@ a:focus-visible {
   margin-bottom: calc(var(--section-gap)/1.75);
 }
 
-/* Cream band with a thick horizontal bar above and below.
+/* Doodled band with a thick horizontal bar above and below.
    ::before = top bar, ::after = bottom bar.
-   The cream fill between them comes from the element's own background. */
+   The doodle tile is the element's own background, so it fills the space between the bars. */
 .title-rule {
-  background-color: var(--header-footer-cream);
+  background: url("images/doodles/header-doodles.svg") repeat-x left center;
+  /* Scale the tile to the space between the bars so no doodle is cut off when the band
+     shrinks on narrow screens. */
+  background-size: auto calc(100% - 2 * var(--line-thick));
   display: block;
   width: 100%;
   margin: 0;
@@ -98,20 +101,18 @@ a:focus-visible {
   width: 100%;
 }
 
-.title-rule::before {
-  margin-bottom: var(--header-rule-gap); /* gap between top bar and name */
-}
-
-.title-rule::after {
-  margin-top: var(--header-rule-gap);    /* gap between name and bottom bar */
-}
+/* The gaps between the bars and the name live in .header-inner's padding (not in bar
+   margins) so its paper background covers the full band height behind the name. */
 
 
 /* ── Footer ─────────────────────────────────────────────────────────────── */
-/* Mirrors the header: cream fill with a thick bar above and below.
-   ::before margin-bottom sizes the cream gap to match the header's height. */
+/* Mirrors the header: doodle fill with a thick bar above and below.
+   ::before margin-bottom sizes the doodled gap to match the header's height. */
 .footer-rule {
-  background-color: var(--header-footer-cream);
+  background: url("images/doodles/header-doodles.svg") repeat-x left center;
+  /* Scale the tile to the space between the bars so no doodle is cut off when the band
+     shrinks on narrow screens. */
+  background-size: auto calc(100% - 2 * var(--line-thick));
   display: block;
   width: 100%;
   margin: calc(var(--section-gap)/1.75) 0 0;
@@ -133,12 +134,16 @@ a:focus-visible {
 
 
 /* ── Header inner layout ────────────────────────────────────────────────── */
-/* Flex row: name on the left, subtitle grid on the right */
+/* Flex row: name on the left, subtitle grid on the right.
+   Shrinks to its content and paints a paper patch that fades out on the right, so the
+   name sits on a clean background and the doodles take over past the subtitle. */
 .header-inner {
   display: flex;
   align-items: center;
   gap: 28px;
-  padding: 0 var(--header-edge-margin);
+  width: fit-content;
+  padding: var(--header-rule-gap) 110px var(--header-rule-gap) var(--header-edge-margin);
+  background: linear-gradient(to right, var(--background-white) calc(100% - 90px), transparent);
 }
 
 h1.name {
@@ -209,14 +214,13 @@ h1.name {
 }
 
 /* ── Project section container ──────────────────────────────────────────── */
-/* Cream background band. Thin horizontal bars above and below are drawn
+/* Project band on the plain page background. Thin horizontal bars above and below are drawn
    with ::before and ::after, extending edge-to-edge via negative margins. */
 #projects {
   scroll-margin-top: 60px;
 }
 
 .projects {
-  background-color: var(--scrollables-cream);
   position: relative;
   padding: 0 var(--content-padding);
 }

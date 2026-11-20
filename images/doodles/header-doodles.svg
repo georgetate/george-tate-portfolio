@@ -1,0 +1,44 @@
+<!-- Repeating tile of hand-drawn style doodles for the header and footer bands.
+     Each doodle nods to a project or interest: a sine wave and resistor (electrical
+     engineering), a camera (photography), a soccer ball (prom-posal), a pencil
+     (design), plus a spiral, lightning bolt, sparkle, and filler marks.
+     Strokes are near-black at low opacity so the doodles read as pencil marks
+     and the photos stay the only real color on the page. -->
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="96" viewBox="0 0 320 96"
+     fill="none" stroke="#1a1814" stroke-opacity="0.26" stroke-width="1.6"
+     stroke-linecap="round" stroke-linejoin="round">
+
+  <!-- Sine wave -->
+  <path d="M10 22 C20 7, 30 8, 40 22 S61 37, 71 21"/>
+
+  <!-- Spiral -->
+  <path d="M40 70 a3 3 0 1 1 3 3 a6.5 6.5 0 1 1 -8.5 -6.5 a10.5 10.5 0 1 1 14.5 12.5"/>
+
+  <!-- Resistor with leads -->
+  <path d="M94 70 h12 l4 -8 l6 16 l6 -16 l6 16 l6 -16 l4 8 h12"/>
+
+  <!-- Lightning bolt -->
+  <path d="M133 8 l-8 14 h8 l-6 14"/>
+
+  <!-- Camera -->
+  <path d="M178 22 h8 l4 -6 h12 l4 6 h8 a3 3 0 0 1 3 3 v17 a3 3 0 0 1 -3 3 h-36 a3 3 0 0 1 -3 -3 v-17 a3 3 0 0 1 3 -3 z"/>
+  <circle cx="196" cy="33" r="7"/>
+  <path d="M209 26 h2"/>
+
+  <!-- Sparkle -->
+  <path d="M240 50 Q242 60 252 62 Q242 64 240 74 Q238 64 228 62 Q238 60 240 50 z"/>
+
+  <!-- Soccer ball -->
+  <circle cx="290" cy="30" r="12"/>
+  <path d="M290 25.5 L294.3 28.6 L292.6 33.6 L287.4 33.6 L285.7 28.6 z"/>
+  <path d="M290 25.5 V18 M294.3 28.6 L301.5 26.5 M292.6 33.6 L297 40 M287.4 33.6 L283 40 M285.7 28.6 L278.5 26.5"/>
+
+  <!-- Pencil -->
+  <path d="M270 77 l8 -4 h30 v8 h-30 z M278 73 v8 M302 73 v8"/>
+
+  <!-- Filler marks: a cross and a few dots -->
+  <path d="M96 20 h8 M100 16 v8"/>
+  <circle cx="160" cy="52" r="1.3" fill="#1a1814" fill-opacity="0.26" stroke="none"/>
+  <circle cx="18" cy="88" r="2.2"/>
+  <circle cx="222" cy="12" r="1.3" fill="#1a1814" fill-opacity="0.26" stroke="none"/>
+</svg>
