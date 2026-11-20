@@ -49,8 +49,8 @@
           </div>
         </div>
         -->
-        <!-- Diagonal line pattern; its left border is the vertical bar after the subtitle -->
-        <div class="header-pattern" aria-hidden="true"></div>
+        <!-- Laser beams bouncing between the bars (drawn by laser-beams.js) -->
+        <div class="header-pattern js-laser-beams" aria-hidden="true"></div>
       </div>
     </div>
   </header>
@@ -297,10 +297,13 @@
        .footer-rule draws two thick horizontal bars via ::before / ::after,
        with a cream-filled gap between them that mirrors the header height.
   ── -->
-  <footer class="footer-rule" aria-hidden="true"></footer>
+  <footer class="footer-rule" aria-hidden="true">
+    <div class="footer-pattern js-laser-beams"></div>
+  </footer>
 
   <script src="horizontal-gallery.js"></script>
   <script src="horizontal-masonry.js"></script>
+  <script src="laser-beams.js"></script>
 
 </body>
 </html>
