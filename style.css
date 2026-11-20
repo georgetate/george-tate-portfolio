@@ -82,7 +82,7 @@ a:focus-visible {
 }
 
 /* Header band with a thick horizontal bar above and below.
-   ::before = top bar, ::after = bottom bar. The pattern is .header-pattern, inside. */
+   ::before = top bar, ::after = bottom bar. */
 .title-rule {
   display: block;
   width: 100%;
